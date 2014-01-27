@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app='timezoneApp'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
+    <script src="./js/timezone.js"></script>
+    <style>
+        .test{
+            background:#BDBDBD;
+        }
+    </style>
+    <title>TimeZone変換</title>
+</head>
+<body>
+<h1>TimeZone変換</h1>
+
+<div ng-controller="timezoneChange">
+<form name="myForm" ng-submit="submit()">
+
+場所：
+<select name="before_locale" ng-model="before_locale">
+   <option ng-repeat="locale in locales" value="{{locale.id}}" ng-selected="{{locale.id == before_locale}}">{{locale.name}}</option>
+</select>
+&nbsp;時間：<input type="text" name="datetime" ng-model="datetime" required>
+<p></p>
+&nbsp;&nbsp;<button type="button" ng-click="convTime()" class="btn btn-primary">変換</button>
+<p></p>
+<table class="table table-bordered">
+    <tbody>
+    <tr ng-repeat="result in results">
+        <td ng-class="isBase(result.base_flg)" width="380">{{result.name}}</td>
+        <td ng-class="isBase(result.base_flg)">{{result.time}}</td>
+    </tr>
+    </tbody>
+</table>
+
+</div>
+</form>
+</body>
+</html>
